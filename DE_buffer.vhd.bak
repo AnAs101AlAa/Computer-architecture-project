@@ -1,0 +1,52 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity dec_exe_buff is
+    port(
+        rst, clk, flush, stall_enable: in std_logic;
+        mem_write_in, is_inport_in, is_immediate_in, flag_enable_in, PC_write_in, alu_mem_out_in, WB1_in, WB2_in, SP_enable_in, Sp_op_in, SP_select_in, FB_enable_in, FB_op_in, outport_enable_in: in std_logic;
+        reg1_data_in, reg2_data_in: in std_logic_vector(31 downto 0);
+        reg1_addr_in, reg2_addr_in, WB1_addr_in, WB2_addr_in: in std_logic_vector(2 downto 0);
+        ALU_op_in: in std_logic_vector(3 downto 0);
+        mem_write_out, is_inport_out, is_immediate_out, flag_enable_out, PC_write_out, alu_mem_out_out, WB1_enable_out, WB2_enable_out, SP_enable_out, Sp_op_out, SP_select_out, FB_enable_out, FB_op_out, outport_enable_out: out std_logic;
+        reg1_data_out, reg2_data_out: out std_logic_vector(31 downto 0);
+        reg1_addr_out, reg2_addr_out, WB1_addr_out, WB2_addr_out: out std_logic_vector(2 downto 0);
+        ALU_op_out: out std_logic_vector(3 downto 0)
+    ); 
+end entity dec_exe_buff;
+
+architecture do of dec_exe_buff is
+begin
+    process(clk, rst)
+    begin
+        if (rst = '1' or flush = '1') then
+            reg1_data_out <= (others => '0');
+            reg2_data_out <= (others => '0');
+            reg1_addr_out <= (others => '0');
+            reg2_addr_out <= (others => '0');
+            is_immediate_out <= '0';
+            is_inport_out <= '0';
+            WB1_enable_out <= '0';
+            WB2_enable_out <= '0';
+            WB1_addr_out <= (others => '0');
+            WB2_addr_out <= (others => '0');
+            ALU_op_out <= (others => '0');
+        elsif rising_edge(clk) then
+            if stall_enable = '0' then
+                reg1_data_out <= reg1_data_in;
+                reg2_data_out <= reg2_data_in;
+                reg1_addr_out <= reg1_addr_in;
+                reg2_addr_out <= reg2_addr_in;
+                is_immediate_out <= is_immediate_in;
+                is_inport_out <= is_in_port_in;
+                WB1_enable_out <= WB1_in;
+                WB2_enable_out <= WB2_in;
+                WB1_addr_out <= WB1_addr_in;
+                WB2_addr_out <= WB2_addr_in;
+                ALU_op_out <= ALU_op_in;
+            else
+                null;
+            end if;
+        end if;
+    end process;
+end do ;

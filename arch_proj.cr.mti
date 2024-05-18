@@ -1,0 +1,294 @@
+D:/Projects/master/address_mux.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/address_mux.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity address_mux
+-- Compiling architecture rtl of address_mux
+
+} {} {}} D:/Projects/master/sign_extend.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/sign_extend.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity sign_extender
+-- Compiling architecture rtl of sign_extender
+
+} {} {}} {D:/Projects/master/flushing unit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/Projects/master/flushing unit.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity flush_unit
+-- Compiling architecture flush_unit_arch of flush_unit
+
+} {} {}} {D:/Projects/master/PC+1 or data.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/Projects/master/PC+1 or data.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity PC_or_data
+-- Compiling architecture rtl of PC_or_data
+
+} {} {}} D:/Projects/master/fetch.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/fetch.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity fetch
+-- Compiling architecture rtl of fetch
+
+} {} {}} {D:/Projects/master/Add 1.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/Projects/master/Add 1.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity add
+-- Compiling architecture adder of add
+
+} {} {}} D:/Projects/master/execute.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/execute.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity execute
+-- Compiling architecture executes of execute
+
+} {} {}} D:/Projects/master/EM_buffer.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/EM_buffer.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity exe_mem_buff
+-- Compiling architecture buff of exe_mem_buff
+
+} {} {}} D:/Projects/master/add2.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/add2.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity add2
+-- Compiling architecture rtl of add2
+
+} {} {}} D:/Projects/master/PC.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/PC.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity PC
+-- Compiling architecture count of PC
+
+} {} {}} D:/Projects/master/FD_buffer.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/FD_buffer.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity fet_dec_buff
+-- Compiling architecture arch of fet_dec_buff
+
+} {} {}} D:/Projects/master/data_mux.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/data_mux.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity data_mux
+-- Compiling architecture rtl of data_mux
+
+} {} {}} D:/Projects/master/flags_mem_mux.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/flags_mem_mux.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity flags_mem_mux
+-- Compiling architecture Behavioral of flags_mem_mux
+
+} {} {}} D:/Projects/master/predictor.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/predictor.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity predictor
+-- Compiling architecture rtl of predictor
+
+} {} {}} D:/Projects/master/MW_buffer.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/MW_buffer.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity mem_wb_buff
+-- Compiling architecture buff of mem_wb_buff
+
+} {} {}} D:/Projects/master/flag_register.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/flag_register.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity flag_register
+-- Compiling architecture flags of flag_register
+
+} {} {}} {D:/Projects/master/Instruction cache.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/Projects/master/Instruction cache.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Instruction_Memory
+-- Compiling architecture Instructions of Instruction_Memory
+
+} {} {}} {D:/Projects/master/predictor mux.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/Projects/master/predictor mux.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity predictor_mux
+-- Compiling architecture rtl of predictor_mux
+
+} {} {}} D:/Projects/master/fetch_decode_so_far.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/fetch_decode_so_far.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity procuss
+-- Compiling architecture finale of procuss
+
+} {} {}} D:/Projects/master/coomparator.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/coomparator.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity comparator
+-- Compiling architecture rtl of comparator
+
+} {} {}} D:/Projects/master/memory.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/memory.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity memory
+-- Compiling architecture mem of memory
+
+} {} {}} D:/Projects/master/ALU.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/ALU.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ALU
+-- Compiling architecture arch3 of ALU
+
+} {} {}} D:/Projects/master/MUX.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/MUX.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity MUX
+-- Compiling architecture RTL of MUX
+
+} {} {}} D:/Projects/master/DE_buffer.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/DE_buffer.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity dec_exe_buff
+-- Compiling architecture do of dec_exe_buff
+
+} {} {}} D:/Projects/master/Data_Memory.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/Data_Memory.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ram
+-- Compiling architecture sync_ram_a of ram
+
+} {} {}} {D:/Projects/master/forwarding unit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/Projects/master/forwarding unit.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity forwarding
+-- Compiling architecture rtl of forwarding
+
+} {} {}} D:/Projects/master/write_back.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/write_back.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity write_back
+-- Compiling architecture rtl of write_back
+
+} {} {}} D:/Projects/master/Register_file.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/Register_file.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity register_file
+-- Compiling architecture registers of register_file
+
+} {} {}} D:/Projects/master/Contro_Unit.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/Contro_Unit.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity CU
+-- Compiling architecture Behavioral of CU
+
+} {} {}} {D:/Projects/master/PC selector.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/Projects/master/PC selector.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity pc_selector
+-- Compiling architecture rtl of pc_selector
+
+} {} {}} D:/Projects/master/decode.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/decode.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity decode
+-- Compiling architecture D_Phase of decode
+
+} {} {}} D:/Projects/master/checker.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/checker.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity checker
+-- Compiling architecture rtl of checker
+
+} {} {}} D:/Projects/master/Stack_Pointer.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Projects/master/Stack_Pointer.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity SP
+-- Compiling architecture minus of SP
+
+} {} {}}

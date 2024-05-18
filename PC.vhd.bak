@@ -1,0 +1,31 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.numeric_std.all;
+
+
+entity PC is
+ port (rst: IN std_logic;
+	clk: IN std_logic;
+	enable:in std_logic;
+	data_in : in std_logic_vector(11 downto 0);
+	address: OUT std_logic_vector(11 downto 0));
+end PC;
+
+architecture count of PC is
+begin
+	process(rst,clk) is
+	variable storage: std_logic_vector(11 downto 0) := (others =>'0');
+	begin
+		if rst = '1' then
+			storage := (others => '0');
+		elsif rising_edge(clk) then
+            if enable = '1' then
+                address <= storage;
+                storage := std_logic_vector(unsigned(storage) + 1);
+            else
+                address := storage;
+            end if;
+        end if;
+	end process;
+	
+end count;

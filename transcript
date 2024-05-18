@@ -1,0 +1,4587 @@
+ORG 0  #this means the the following line would be  at address  0 , and this is the reset address
+# invalid command name "ORG"
+10
+# [10]
+
+.ORG 10
+# invalid command name ".ORG"
+
+IN R2            #R2=19 add 19 in R2
+# D:/Projects/master/arch_proj.mpf
+IN R3            #R3=FFFFFFFF
+# D:/Projects/master/arch_proj.mpf
+IN R4            #R4=FFFFF320
+# D:/Projects/master/arch_proj.mpf
+LDM R1,5         #R1=5
+# invalid command name "LDM"
+PUSH R1          #SP=FFD,M[FFE]=5
+# invalid command name "FFE"
+PUSH R2          #SP=FFB,M[FFC]=19
+# invalid command name "FFC"
+POP R1           #SP=FFD,R1=19
+# invalid command name "POP"
+POP R2           #SP=FFF,R2=5
+# invalid command name "POP"
+Load use & Memory to ALU
+# ambiguous command name "Load": LoadCompleteMsg LoadCompleteMsgDone LoadCompleteMsgError LoadPADebugSupplyNwDoFile LoadScDebug LoadingMarque
+ADD R5, R2, R1   #R5=1E
+# invalid command name "ADD"
+
+IN R5            #R5= 10 
+# D:/Projects/master/arch_proj.mpf
+STD R2,200(R5)   #M[210]=5 - address is hexa
+# invalid command name "STD"
+
+STD R1,201(R5)   #M[211]=19 - address is hexa
+# invalid command name "STD"
+LDD R3,201(R5)   #R3=19
+# invalid command name "LDD"
+LDD R4,200(R5)   #R4=5
+# invalid command name "LDD"
+Load use & memory to ALU
+# ambiguous command name "Load": LoadCompleteMsg LoadCompleteMsgDone LoadCompleteMsgError LoadPADebugSupplyNwDoFile LoadScDebug LoadingMarque
+ADD R5, R4, R3   #R5=1E
+# invalid command name "ADD"
+
+Load use & Load use at load & mem2alu
+# ambiguous command name "Load": LoadCompleteMsg LoadCompleteMsgDone LoadCompleteMsgError LoadPADebugSupplyNwDoFile LoadScDebug LoadingMarque
+IN R5            #R5= 10
+# D:/Projects/master/arch_proj.mpf
+IN R2            #R2=19
+# D:/Projects/master/arch_proj.mpf
+STD R4, 200(R2)  #M[219]=5
+# invalid command name "STD"
+LDD R3, 201(R5)  #R3=19
+# invalid command name "LDD"
+LDD R2, 200(R3)  #R2=5
+# invalid command name "LDD"
+ADD R2, R2, R3   #R2=1E
+# invalid command name "ADD"
+
+free not protected
+# invalid command name "free"
+IN R1            #R1 = 211
+# D:/Projects/master/arch_proj.mpf
+FREE R1          #P[211] = 0
+# invalid command name "FREE"
+
+Protect then Free
+# invalid command name "Protect"
+IN R1            #R1 = 211 
+# D:/Projects/master/arch_proj.mpf
+PROTECT R1       #P[211]=1
+# invalid command name "PROTECT"
+ADD R5, R4, R3   #R5=1E
+# invalid command name "ADD"
+FREE R1          #P[211]=0
+# invalid command name "FREE"
+STD R5, 0(R1)    #M[211]=1E
+# invalid command name "STD"
+
+Exceptions
+# invalid command name "Exceptions"
+IN R2            #R2 = 100 
+# D:/Projects/master/arch_proj.mpf
+PROTECT R2       #P[100]=1
+# invalid command name "PROTECT"
+STD R1, 0(R2)    # PROTECTED EXCEPTION
+# invalid command name "STD"
+
+
+#Only for teams implementing exceptions (place these 2 lines before IN R2; PROTECT R2 (previous block) in another run to test exception)
+POP R3  #exception
+# invalid command name "POP"
+ADD R1, R2, R3 #should not execute as there is an exception
+# invalid command name "ADD"
+vsim -gui work.procuss
+# vsim -gui work.procuss 
+# Start time: 05:33:38 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft2w6415".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft2w6415
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+mem load -i D:/Projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/executer/alu_main/OP1
+add wave -position end  sim:/procuss/executer/alu_main/OP2
+add wave -position end  sim:/procuss/executer/alu_main/code
+add wave -position end  sim:/procuss/executer/alu_main/f
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+mem load -i D:/Projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+mem load -i D:/Projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+add wave -position end  sim:/procuss/executer/OP1_MUX/A
+add wave -position end  sim:/procuss/executer/OP1_MUX/B
+add wave -position end  sim:/procuss/executer/OP1_MUX/Selector
+add wave -position end  sim:/procuss/executer/OP1_MUX/Y
+add wave -position end  sim:/procuss/executer/OP2_MUX/A
+add wave -position end  sim:/procuss/executer/OP2_MUX/B
+add wave -position end  sim:/procuss/executer/OP2_MUX/Selector
+add wave -position end  sim:/procuss/executer/OP2_MUX/Y
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+mem load -i D:/Projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+run
+run
+run
+run
+run
+run
+add wave -position 2  sim:/procuss/instruction_buffer
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+mem load -i D:/Projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/stall_Fenable
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/executer/forward_unit/memory_mem_or_alu
+add wave -position end  sim:/procuss/executer/forward_unit/memory_mem_output
+add wave -position end  sim:/procuss/executer/forward_unit/memory_alu_output
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/executer/forward_unit/reg1_data
+add wave -position end  sim:/procuss/executer/forward_unit/reg2_data
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/executer/forward_unit/operand2
+add wave -position end  sim:/procuss/executer/forward_unit/operand1
+add wave -position end  sim:/procuss/executer/forward_unit/execute_reg2_data
+add wave -position end  sim:/procuss/executer/forward_unit/reg2_address
+add wave -position 28  sim:/procuss/executer/forward_unit/execute_reg2_data
+add wave -position 29  sim:/procuss/executer/forward_unit/execute_reg2_address
+add wave -position 30  sim:/procuss/executer/forward_unit/memory_reg2_address
+add wave -position 30  sim:/procuss/executer/forward_unit/memory_reg2_data
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/executer/forward_unit/memory_mem_or_alu
+add wave -position end  sim:/procuss/executer/forward_unit/execute_wb1_enable
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 22  sim:/procuss/executer/forward_unit/execute_alu_output
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 35  sim:/procuss/executer/forward_unit/execute_mem_or_alu
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 31  sim:/procuss/executer/forward_unit/execute_reg1_address
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 27  sim:/procuss/executer/forward_unit/memory_reg2_data
+add wave -position 29  sim:/procuss/executer/forward_unit/memory_reg1_address
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/executer/forward_unit/memory_wb1_enable
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 29  sim:/procuss/executer/forward_unit/execute_reg2_address
+add wave -position 35  sim:/procuss/executer/forward_unit/memory_reg2_address
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 32  sim:/procuss/executer/forward_unit/memory_reg1_address
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 35  sim:/procuss/executer/forward_unit/operand1
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 9  sim:/procuss/reg1_data_buffer
+add wave -position 10  sim:/procuss/reg2_data_buffer
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 29  sim:/procuss/executer/forward_unit/reg1_data
+add wave -position 31  sim:/procuss/executer/forward_unit/reg1_address
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position 11  sim:/procuss/reg1_addr_buffer
+add wave -position 12  sim:/procuss/reg2_addr_buffer
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of Add 1.vhd was successful.
+# Compile of add2.vhd was successful.
+# Compile of address_mux.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of checker.vhd was successful.
+# Compile of Contro_Unit.vhd was successful.
+# Compile of coomparator.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of data_mux.vhd was successful.
+# Compile of DE_buffer.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of EM_buffer.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of FD_buffer.vhd was successful.
+# Compile of fetch.vhd was successful.
+# Compile of fetch_decode_so_far.vhd was successful.
+# Compile of flag_register.vhd was successful.
+# Compile of flags_mem_mux.vhd was successful.
+# Compile of flushing unit.vhd was successful.
+# Compile of forwarding unit.vhd was successful.
+# Compile of Instruction cache.vhd was successful.
+# Compile of memory.vhd was successful.
+# Compile of MUX.vhd was successful.
+# Compile of MW_buffer.vhd was successful.
+# Compile of PC selector.vhd was successful.
+# Compile of PC.vhd was successful.
+# Compile of PC+1 or data.vhd was successful.
+# Compile of predictor mux.vhd was successful.
+# Compile of predictor.vhd was successful.
+# Compile of Register_file.vhd was successful.
+# Compile of sign_extend.vhd was successful.
+# Compile of Stack_Pointer.vhd was successful.
+# Compile of write_back.vhd was successful.
+# 33 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of Contro_Unit.vhd failed with 1 errors.
+# Compile of Contro_Unit.vhd was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.cu(behavioral)
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+# Compile of Contro_Unit.vhd was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.cu(behavioral)
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+# Compile of Contro_Unit.vhd was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.cu(behavioral)
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of Contro_Unit.vhd was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.cu(behavioral)
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of Contro_Unit.vhd was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.cu(behavioral)
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of Contro_Unit.vhd was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.cu(behavioral)
+force -freeze sim:/procuss/rst 1 0
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+force -freeze sim:/procuss/rst 0 0
+mem load -filltype value -filldata 0010000010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(0)
+mem load -filltype value -filldata 0010000100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(1)
+mem load -filltype value -filldata 0001110010000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(2)
+mem load -filltype value -filldata 0001110100000000 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(3)
+mem load -filltype value -filldata 1000000010101010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 00000019 -fillradix hexadecimal /procuss/decoder/reg_file/storage(1)
+mem load -filltype value -filldata 00000005 -fillradix hexadecimal /procuss/decoder/reg_file/storage(2)
+mem load -filltype value -filldata {00000000 } -fillradix hexadecimal /procuss/decoder/reg_file/storage(0)
+mem load -filltype value -filldata 1000000100011010 -fillradix symbolic /procuss/fetcher/Instruction_Memory_inst/ram(4)
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 07:32:46 on May 18,2024, Elapsed time: 1:59:08
+# Errors: 0, Warnings: 2
+vsim -gui work.procuss
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+quit -sim
+# End time: 07:34:02 on May 18,2024, Elapsed time: 0:00:34
+# Errors: 0, Warnings: 4
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+# Error while executing: mem load
+# Usage: mem load {-infile <infile> | -filldata <data_word> [-infile <infile>]} [-endaddress <end>] [-fillradix <radix_type>] [-filltype {dec | inc | rand | value}] [-format [bin | hex | mti]] [<path>] [-skip <Nwords>] [-startaddress <st>] [-truncate]
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+force -freeze sim:/procuss/input_all 32'h19 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+run
+# No Design Loaded!
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+run
+# No Design Loaded!
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+run
+# No Design Loaded!
+force -freeze sim:/procuss/input_all 32'h10 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+vsim -gui work.procuss
+# vsim -gui work.procuss 
+# Start time: 07:34:08 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlftnk0v4e".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftnk0v4e
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+quit -sim
+# End time: 07:40:11 on May 18,2024, Elapsed time: 0:06:03
+# Errors: 0, Warnings: 1
+vsim -gui work.procuss
+# vsim -gui work.procuss 
+# Start time: 07:40:16 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlftbjmwsv".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftbjmwsv
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+add wave -position 8  sim:/procuss/instruction_buffer
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+vsim -gui work.procuss
+# End time: 07:42:12 on May 18,2024, Elapsed time: 0:01:56
+# Errors: 0, Warnings: 1
+# vsim -gui work.procuss 
+# Start time: 07:42:12 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlftbw2c86".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftbw2c86
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/stall_Fenable
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+vsim -gui work.procuss
+# End time: 07:44:43 on May 18,2024, Elapsed time: 0:02:31
+# Errors: 0, Warnings: 1
+# vsim -gui work.procuss 
+# Start time: 07:44:43 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft5vf29h".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft5vf29h
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+run
+run
+run
+add wave -position end  sim:/procuss/stall_Fenable
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+vsim -gui work.procuss
+# End time: 07:46:14 on May 18,2024, Elapsed time: 0:01:31
+# Errors: 0, Warnings: 1
+# vsim -gui work.procuss 
+# Start time: 07:46:14 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft9kcxgt".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft9kcxgt
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+add wave -position end  sim:/procuss/instruction_buffer
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+add wave -position end  sim:/procuss/stall_Fenable
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+vsim -gui work.procuss
+# End time: 08:07:41 on May 18,2024, Elapsed time: 0:21:27
+# Errors: 0, Warnings: 1
+# vsim -gui work.procuss 
+# Start time: 08:07:41 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft49kqe7".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft49kqe7
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+add wave -position end  sim:/procuss/instruction_buffer
+vsim -gui work.procuss
+# End time: 08:09:31 on May 18,2024, Elapsed time: 0:01:50
+# Errors: 0, Warnings: 1
+# vsim -gui work.procuss 
+# Start time: 08:09:31 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft0g0cds".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft0g0cds
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/instruction_buffer
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+add wave -position end  sim:/procuss/stall_Fenable
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/procuss/reg1_data_buffer
+add wave -position end  sim:/procuss/reg2_data_buffer
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+
+
+
+
+
+
+
+
+
+
+
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0vsim -gui work.procuss
+# Unknown option: gui
+# ** UI-Msg: (vish-4003) Invalid option '-gui'.
+# 
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+vsim -gui work.procuss
+# End time: 08:13:17 on May 18,2024, Elapsed time: 0:03:46
+# Errors: 0, Warnings: 1
+# vsim -gui work.procuss 
+# Start time: 08:13:17 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft47rne3".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft47rne3
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+add wave -position end  sim:/procuss/reg2_data_buffer
+add wave -position 9  sim:/procuss/reg1_data_buffer
+add wave -position 9  sim:/procuss/instruction_buffer
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of Add 1.vhd was successful.
+# Compile of add2.vhd was successful.
+# Compile of address_mux.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of checker.vhd was successful.
+# Compile of Contro_Unit.vhd was successful.
+# Compile of coomparator.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of data_mux.vhd was successful.
+# Compile of DE_buffer.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of EM_buffer.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of FD_buffer.vhd was successful.
+# Compile of fetch.vhd was successful.
+# Compile of fetch_decode_so_far.vhd was successful.
+# Compile of flag_register.vhd was successful.
+# Compile of flags_mem_mux.vhd was successful.
+# Compile of flushing unit.vhd was successful.
+# Compile of forwarding unit.vhd was successful.
+# Compile of Instruction cache.vhd was successful.
+# Compile of memory.vhd was successful.
+# Compile of MUX.vhd was successful.
+# Compile of MW_buffer.vhd was successful.
+# Compile of PC selector.vhd was successful.
+# Compile of PC.vhd was successful.
+# Compile of PC+1 or data.vhd was successful.
+# Compile of predictor mux.vhd was successful.
+# Compile of predictor.vhd was successful.
+# Compile of Register_file.vhd was successful.
+# Compile of sign_extend.vhd was successful.
+# Compile of Stack_Pointer.vhd was successful.
+# Compile of write_back.vhd was successful.
+# 33 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+flag_reg: flag_register port map(
+# invalid command name "flag_reg:"
+        rst => rst,
+# invalid command name "rst"
+        clk => clk,
+# invalid command name "clk"
+        feedback => flag_feedback,
+# invalid command name "feedback"
+        memory_feedback => mem_feedback,
+# invalid command name "memory_feedback"
+        enable => flag_enable,
+# expected integer but got "=>"
+# ** UI-Msg: (vsim-3327) Invalid ID number '=>'. Must be a positive integer.
+        flag_in => alu_to_flags,
+# invalid command name "flag_in"
+        flag_out => flags_to_alu,
+# invalid command name "flag_out"
+        JZ => jump_zero_enable
+# invalid command name "JZ"
+    );
+# invalid command name ")"
+vsim -gui work.procuss
+# End time: 08:21:16 on May 18,2024, Elapsed time: 0:07:59
+# Errors: 0, Warnings: 1
+# vsim -gui work.procuss 
+# Start time: 08:21:16 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlftwvxd30".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftwvxd30
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+# (vsim-3652) Illegal address '<<<<<<<' found on line 4 of file "D:/projects/master/instructions.mem".
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+run
+add wave -position end  sim:/procuss/instruction_buffer
+add wave -position end  sim:/procuss/reg1_data_buffer
+add wave -position end  sim:/procuss/reg2_data_buffer
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vsim -gui work.procuss
+# End time: 08:22:14 on May 18,2024, Elapsed time: 0:00:58
+# Errors: 0, Warnings: 6
+# vsim -gui work.procuss 
+# Start time: 08:22:14 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlfttbqrtr".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlfttbqrtr
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+# (vsim-3652) Illegal address '<<<<<<<' found on line 4 of file "D:/projects/master/instructions.mem".
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+add wave -position end  sim:/procuss/instruction_buffer
+add wave -position end  sim:/procuss/reg1_data_buffer
+add wave -position end  sim:/procuss/reg2_data_buffer
+run
+run
+vsim -gui work.procuss
+# End time: 08:23:07 on May 18,2024, Elapsed time: 0:00:53
+# Errors: 0, Warnings: 6
+# vsim -gui work.procuss 
+# Start time: 08:23:07 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlftqb7j5h".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftqb7j5h
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i E:/Arch_Project/FINALL/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+# ** UI-Msg: (vsim-7) Failed to open mem file "E:/Arch_Project/FINALL/master/instructions.mem" in read mode.
+# No such file or directory. (errno = ENOENT)
+mem load -i E:/Arch_Project/FINALL/master/memory.mem -format mti /procuss/memory_man/umem/ram
+# ** UI-Msg: (vsim-7) Failed to open mem file "E:/Arch_Project/FINALL/master/memory.mem" in read mode.
+# No such file or directory. (errno = ENOENT)
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+vsim -gui work.procuss
+# End time: 08:24:16 on May 18,2024, Elapsed time: 0:01:09
+# Errors: 0, Warnings: 6
+# vsim -gui work.procuss 
+# Start time: 08:24:16 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlftfjqkar".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftfjqkar
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+# (vsim-3652) Illegal address '<<<<<<<' found on line 4 of file "D:/projects/master/instructions.mem".
+
+
+mem load -i D:/projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+vsim -gui work.procuss
+# End time: 08:24:39 on May 18,2024, Elapsed time: 0:00:23
+# Errors: 0, Warnings: 6
+# vsim -gui work.procuss 
+# Start time: 08:24:39 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+# vsim -gui work.procuss 
+# Start time: 07:33:28 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft7yybfh".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft7yybfh
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft3nf9bb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft3nf9bb
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+# (vsim-3652) Illegal address '<<<<<<<' found on line 4 of file "D:/projects/master/instructions.mem".
+
+
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+quit -sim
+# End time: 08:25:30 on May 18,2024, Elapsed time: 0:00:51
+# Errors: 0, Warnings: 6
+
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+force -freeze sim:/procuss/input_all 32'h19 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+run
+# No Design Loaded!
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+run
+# No Design Loaded!
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+run
+# No Design Loaded!
+force -freeze sim:/procuss/input_all 32'h10 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+vsim -gui work.procuss
+# vsim -gui work.procuss 
+# Start time: 08:26:03 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlftzjsigt".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftzjsigt
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/Projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+# (vsim-3652) Illegal address '<<<<<<<' found on line 4 of file "D:/Projects/master/instructions.mem".
+
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+vsim -gui work.procuss
+# End time: 08:27:57 on May 18,2024, Elapsed time: 0:01:54
+# Errors: 0, Warnings: 6
+# vsim -gui work.procuss 
+# Start time: 08:27:57 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlftemn9gv".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftemn9gv
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/Projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+# (vsim-3652) Illegal address '<<<<<<<' found on line 4 of file "D:/Projects/master/instructions.mem".
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+vsim -gui work.procuss
+# End time: 08:29:17 on May 18,2024, Elapsed time: 0:01:20
+# Errors: 0, Warnings: 6
+# vsim -gui work.procuss 
+# Start time: 08:29:17 on May 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.procuss(finale)
+# Loading work.fetch(rtl)
+# Loading work.instruction_memory(instructions)
+# Loading work.pc(count)
+# Loading work.add(adder)
+# Loading work.pc_selector(rtl)
+# Loading work.fet_dec_buff(arch)
+# Loading work.decode(d_phase)
+# Loading work.flush_unit(flush_unit_arch)
+# Loading work.predictor(rtl)
+# Loading work.predictor_mux(rtl)
+# Loading work.cu(behavioral)
+# Loading work.register_file(registers)
+# Loading work.sign_extender(rtl)
+# Loading work.dec_exe_buff(do)
+# Loading work.execute(executes)
+# Loading work.checker(rtl)
+# Loading work.comparator(rtl)
+# Loading work.forwarding(rtl)
+# Loading work.mux(rtl)
+# Loading work.alu(arch3)
+# Loading work.flag_register(flags)
+# Loading work.exe_mem_buff(buff)
+# Loading work.memory(mem)
+# Loading work.flags_mem_mux(behavioral)
+# Loading work.data_mux(rtl)
+# Loading work.sp(minus)
+# Loading work.add2(rtl)
+# Loading work.address_mux(rtl)
+# Loading work.ram(sync_ram_a)
+# Loading work.mem_wb_buff(buff)
+# Loading work.write_back(rtl)
+add wave -position end  sim:/procuss/clk
+add wave -position end  sim:/procuss/rst
+add wave -position end  sim:/procuss/input_all
+add wave -position end  sim:/procuss/interrupt
+add wave -position end  sim:/procuss/restart
+add wave -position end  sim:/procuss/ouput_all
+add wave -position end  sim:/procuss/output_enable_all
+add wave -position end  sim:/procuss/pc_value_buffer
+add wave -position end  sim:/procuss/executer/flag_reg/flag_out
+force -freeze sim:/procuss/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/procuss/rst 1 0
+run
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Anas  Hostname: DESKTOP-HN61IB1  ProcessID: 10020
+#           Attempting to use alternate WLF file "./wlft7arah5".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft7arah5
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/decoder/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /procuss/fetcher/Instruction_Memory_inst
+run
+force -freeze sim:/procuss/rst 0 0
+force -freeze sim:/procuss/interrupt 0 0
+force -freeze sim:/procuss/restart 0 0
+force -freeze sim:/procuss/input_all 32'h0 0
+mem load -i D:/Projects/master/instructions.mem -format mti /procuss/fetcher/Instruction_Memory_inst/ram
+mem load -i D:/Projects/master/memory.mem -format mti /procuss/memory_man/umem/ram
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/procuss/input_all 32'h19 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFFFFF 0
+run
+force -freeze sim:/procuss/input_all 32'hFFFFF320 0
+run
+force -freeze sim:/procuss/input_all 32'h10 0
+add wave -position end  sim:/procuss/instruction_buffer
+add wave -position end  sim:/procuss/reg1_data_buffer
+add wave -position end  sim:/procuss/reg2_data_buffer
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# End time: 08:33:46 on May 18,2024, Elapsed time: 0:04:29
+# Errors: 0, Warnings: 6
